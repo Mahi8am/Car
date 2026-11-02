@@ -1,0 +1,234 @@
+[
+  {
+    "key": "hero-candidate-a",
+    "file": "hero/hero-candidate-a.webp",
+    "defaultKb": 79,
+    "budgetLimitKb": 400,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 23,
+        "webpKb": 20
+      },
+      {
+        "width": 1024,
+        "avifKb": 48,
+        "webpKb": 40
+      },
+      {
+        "width": 1600,
+        "avifKb": 100,
+        "webpKb": 79
+      },
+      {
+        "width": 2400,
+        "avifKb": 217,
+        "webpKb": 153
+      }
+    ]
+  },
+  {
+    "key": "hero-candidate-b",
+    "file": "hero/hero-candidate-b.webp",
+    "defaultKb": 54,
+    "budgetLimitKb": 400,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 18,
+        "webpKb": 14
+      },
+      {
+        "width": 1024,
+        "avifKb": 35,
+        "webpKb": 28
+      },
+      {
+        "width": 1600,
+        "avifKb": 72,
+        "webpKb": 54
+      },
+      {
+        "width": 2400,
+        "avifKb": 155,
+        "webpKb": 109
+      }
+    ]
+  },
+  {
+    "key": "hero-candidate-c",
+    "file": "hero/hero-candidate-c.webp",
+    "defaultKb": 82,
+    "budgetLimitKb": 400,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 21,
+        "webpKb": 19
+      },
+      {
+        "width": 1024,
+        "avifKb": 47,
+        "webpKb": 37
+      },
+      {
+        "width": 1600,
+        "avifKb": 123,
+        "webpKb": 82
+      },
+      {
+        "width": 2400,
+        "avifKb": 369,
+        "webpKb": 206
+      }
+    ]
+  },
+  {
+    "key": "hero-candidate-d",
+    "file": "hero/hero-candidate-d.webp",
+    "defaultKb": 111,
+    "budgetLimitKb": 400,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 30,
+        "webpKb": 28
+      },
+      {
+        "width": 1024,
+        "avifKb": 61,
+        "webpKb": 56
+      },
+      {
+        "width": 1600,
+        "avifKb": 122,
+        "webpKb": 111
+      },
+      {
+        "width": 2400,
+        "avifKb": 234,
+        "webpKb": 207
+      }
+    ]
+  },
+  {
+    "key": "service-buy",
+    "file": "services/service-buy.webp",
+    "defaultKb": 80,
+    "budgetLimitKb": 250,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 43,
+        "webpKb": 35
+      },
+      {
+        "width": 1024,
+        "avifKb": 89,
+        "webpKb": 75
+      },
+      {
+        "width": 1600,
+        "avifKb": 173,
+        "webpKb": 146
+      },
+      {
+        "width": 2400,
+        "avifKb": 296,
+        "webpKb": 254
+      }
+    ]
+  },
+  {
+    "key": "service-sell",
+    "file": "services/service-sell.webp",
+    "defaultKb": 138,
+    "budgetLimitKb": 250,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 54,
+        "webpKb": 49
+      },
+      {
+        "width": 1024,
+        "avifKb": 131,
+        "webpKb": 122
+      },
+      {
+        "width": 1600,
+        "avifKb": 291,
+        "webpKb": 275
+      },
+      {
+        "width": 2400,
+        "avifKb": 560,
+        "webpKb": 537
+      }
+    ]
+  },
+  {
+    "key": "service-rent",
+    "file": "services/service-rent.webp",
+    "defaultKb": 182,
+    "budgetLimitKb": 250,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 72,
+        "webpKb": 67
+      },
+      {
+        "width": 1024,
+        "avifKb": 171,
+        "webpKb": 160
+      },
+      {
+        "width": 1600,
+        "avifKb": 388,
+        "webpKb": 358
+      },
+      {
+        "width": 2400,
+        "avifKb": 790,
+        "webpKb": 739
+      }
+    ]
+  },
+  {
+    "key": "service-home-service",
+    "file": "services/service-home-service.webp",
+    "defaultKb": 150,
+    "budgetLimitKb": 250,
+    "status": "PASS",
+    "variants": [
+      {
+        "width": 640,
+        "avifKb": 62,
+        "webpKb": 61
+      },
+      {
+        "width": 1024,
+        "avifKb": 133,
+        "webpKb": 132
+      },
+      {
+        "width": 1600,
+        "avifKb": 269,
+        "webpKb": 270
+      },
+      {
+        "width": 2400,
+        "avifKb": 501,
+        "webpKb": 501
+      }
+    ]
+  }
+]
