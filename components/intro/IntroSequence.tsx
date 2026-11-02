@@ -43,6 +43,7 @@ import {
   getMasterTimeline,
 } from '@/lib/animation/masterTimeline';
 import { TIMING } from '@/lib/animation/timing';
+import { introState } from '@/lib/animation/introState';
 
 /* ── Dynamic canvas (never SSR, separate lazy chunk) ─────────────────────── */
 const IntroCanvas = dynamic(() => import('./IntroCanvas'), { ssr: false });

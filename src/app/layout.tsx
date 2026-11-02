@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   // TODO: update to production domain when available
   metadataBase: process.env.NEXT_PUBLIC_SITE_URL
     ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-    : new URL('http://localhost:3000'),
+    : new URL('https://garirmela123.netlify.app'),
   title: siteConfig.siteTitle,
   description: siteConfig.metaDescription,
   openGraph: {
