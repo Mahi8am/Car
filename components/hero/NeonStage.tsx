@@ -42,8 +42,10 @@ export function NeonStage() {
   // Ignition sequence driven by heroProgress or immediate in fallback
   useEffect(() => {
     if (reducedMotion || introState.introComplete) {
-      setIgnited(true);
-      setFlickerOpacity(1);
+      queueMicrotask(() => {
+        setIgnited(true);
+        setFlickerOpacity(1);
+      });
       return;
     }
 

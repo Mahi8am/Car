@@ -23,6 +23,9 @@ export function FeaturedCars() {
   const reducedMotion = useReducedMotion();
   const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.15, triggerOnce: true });
 
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
   const goTo = useCallback((index: number, dir: 'next' | 'prev' = 'next') => {
     if (animating) return;
     setSlideDir(dir);
@@ -46,6 +49,29 @@ export function FeaturedCars() {
   const handleManualGoTo = (index: number) => {
     setHasUserInteracted(true);
     goTo(index, index > activeIndex ? 'next' : 'prev');
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaX = touchEndX - touchStartX.current;
+    const deltaY = touchEndY - (touchStartY.current ?? touchEndY);
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 35) {
+      if (deltaX < 0) {
+        handleManualNext();
+      } else {
+        handleManualPrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   // Auto-advance slideshow smoothly every 5.5s UNLESS user has manually changed them
@@ -73,6 +99,8 @@ export function FeaturedCars() {
     <section
       id="featured-cars"
       ref={sectionRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       aria-labelledby="featured-cars-heading"
       style={{
         position: 'relative',
@@ -211,9 +239,8 @@ export function FeaturedCars() {
 
         {/* ── Side-by-Side Layout: Left = Image, Right = Text ───────────────── */}
         <div
+          className="grid grid-cols-1 md:grid-cols-2"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: 'clamp(1.5rem, 3.5vw, 3rem)',
             alignItems: 'stretch',
           }}
@@ -327,15 +354,17 @@ export function FeaturedCars() {
             </div>
           </div>
 
-          {/* ── RIGHT: Car Details & Description ─────────────────────────────── */}
+          {/* ── RIGHT: Car Details & Description (Crisp White Card with Dark Typography) ─ */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              backgroundColor: '#ffffff',
+              border: '1px solid rgba(35, 35, 38, 0.12)',
+              boxShadow: '0 10px 32px rgba(0, 0, 0, 0.25)',
+              borderRadius: '2px',
               opacity: animating ? 0.15 : 1,
               transform: animating
                 ? slideDir === 'next'
@@ -368,14 +397,15 @@ export function FeaturedCars() {
                   >
                     {car.brand}
                   </span>
-                  <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem' }}>·</span>
+                  <span style={{ color: 'rgba(0, 0, 0, 0.25)', fontSize: '0.7rem' }}>·</span>
                   <span
                     style={{
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.68rem',
-                      color: 'rgba(255,255,255,0.55)',
+                      color: 'rgba(22, 22, 23, 0.65)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
+                      fontWeight: 500,
                     }}
                   >
                     {car.condition}
@@ -388,8 +418,9 @@ export function FeaturedCars() {
                     style={{
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.65rem',
-                      color: 'rgba(255,255,255,0.7)',
+                      color: 'rgba(22, 22, 23, 0.72)',
                       letterSpacing: '0.08em',
+                      fontWeight: 600,
                     }}
                   >
                     INSPECTED
@@ -406,7 +437,7 @@ export function FeaturedCars() {
                   textTransform: 'uppercase',
                   letterSpacing: '-0.02em',
                   lineHeight: 0.95,
-                  color: '#ffffff',
+                  color: 'var(--ink-950)',
                   margin: '0 0 1rem 0',
                 }}
               >
@@ -418,7 +449,7 @@ export function FeaturedCars() {
                 style={{
                   fontFamily: 'var(--font-manrope), sans-serif',
                   fontSize: '0.88rem',
-                  color: 'rgba(255,255,255,0.78)',
+                  color: 'rgba(22, 22, 23, 0.8)',
                   lineHeight: 1.6,
                   marginBottom: '1.25rem',
                 }}
@@ -434,7 +465,7 @@ export function FeaturedCars() {
                   gap: '0.75rem',
                   paddingBottom: '1.25rem',
                   marginBottom: '1.25rem',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                  borderBottom: '1px solid rgba(35, 35, 38, 0.08)',
                 }}
               >
                 {[
@@ -449,10 +480,11 @@ export function FeaturedCars() {
                       style={{
                         fontFamily: 'var(--font-manrope), sans-serif',
                         fontSize: '0.8rem',
-                        color: 'rgba(255,255,255,0.75)',
+                        color: 'rgba(22, 22, 23, 0.85)',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
+                        fontWeight: 500,
                       }}
                     >
                       {label}
@@ -480,10 +512,11 @@ export function FeaturedCars() {
                       display: 'block',
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.62rem',
-                      color: 'rgba(255,255,255,0.45)',
+                      color: 'rgba(22, 22, 23, 0.55)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.12em',
                       marginBottom: '0.15rem',
+                      fontWeight: 600,
                     }}
                   >
                     ASKING PRICE
@@ -493,7 +526,7 @@ export function FeaturedCars() {
                       fontFamily: 'var(--font-barlow-condensed), sans-serif',
                       fontSize: 'clamp(1.85rem, 2.5vw, 2.35rem)',
                       fontWeight: 700,
-                      color: '#ffffff',
+                      color: 'var(--ink-950)',
                       lineHeight: 1,
                     }}
                   >
@@ -505,7 +538,8 @@ export function FeaturedCars() {
                   style={{
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.68rem',
-                    color: 'rgba(255,255,255,0.5)',
+                    color: 'rgba(22, 22, 23, 0.6)',
+                    fontWeight: 500,
                   }}
                 >
                   BDT · NEGOTIABLE
@@ -551,26 +585,68 @@ export function FeaturedCars() {
                   <ArrowUpRight size={14} />
                 </Link>
 
-                {/* Slideshow Dots */}
-                <div style={{ display: 'flex', gap: '0.45rem', alignItems: 'center' }}>
-                  {featuredCars.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => handleManualGoTo(i)}
-                      aria-label={`Go to car ${i + 1}`}
-                      style={{
-                        width: i === activeIndex ? 22 : 7,
-                        height: 7,
-                        borderRadius: i === activeIndex ? '4px' : '50%',
-                        backgroundColor: i === activeIndex ? 'var(--red)' : 'rgba(255,255,255,0.22)',
-                        border: 'none',
-                        cursor: 'pointer',
-                        transition: reducedMotion ? 'none' : 'width 0.25s ease, background-color 0.25s ease',
-                        padding: 0,
-                      }}
-                    />
-                  ))}
+                {/* Slideshow Navigation Controls (Thumb Friendly for Mobile) */}
+                <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={handleManualPrev}
+                    aria-label="Previous car"
+                    className="flex md:hidden"
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(35, 35, 38, 0.08)',
+                      border: '1px solid rgba(35, 35, 38, 0.18)',
+                      color: 'var(--ink-950)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  <div style={{ display: 'flex', gap: '0.45rem', alignItems: 'center' }}>
+                    {featuredCars.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => handleManualGoTo(i)}
+                        aria-label={`Go to car ${i + 1}`}
+                        style={{
+                          width: i === activeIndex ? 22 : 7,
+                          height: 7,
+                          borderRadius: i === activeIndex ? '4px' : '50%',
+                          backgroundColor: i === activeIndex ? 'var(--red)' : 'rgba(35, 35, 38, 0.22)',
+                          border: 'none',
+                          cursor: 'pointer',
+                          transition: reducedMotion ? 'none' : 'width 0.25s ease, background-color 0.25s ease',
+                          padding: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleManualNext}
+                    aria-label="Next car"
+                    className="flex md:hidden"
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(35, 35, 38, 0.08)',
+                      border: '1px solid rgba(35, 35, 38, 0.18)',
+                      color: 'var(--ink-950)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -578,15 +654,15 @@ export function FeaturedCars() {
         </div>
       </div>
 
-      {/* ── Left Edge Previous Button ────────────────────────────────────────── */}
+      {/* ── Left Edge Previous Button (Visible on both PC & Mobile) ─────────── */}
       <button
         type="button"
         onClick={handleManualPrev}
         aria-label="Previous car"
-        className="bencho-sweep-button"
+        className="bencho-sweep-button flex"
         style={{
           position: 'absolute',
-          left: 'clamp(0.6rem, 1.8vw, 1.75rem)',
+          left: 'clamp(0.4rem, 1.8vw, 1.75rem)',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 25,
@@ -594,10 +670,9 @@ export function FeaturedCars() {
           backdropFilter: 'blur(12px)',
           border: '1.5px solid rgba(255, 255, 255, 0.22)',
           color: '#ffffff',
-          width: 'clamp(42px, 3.5vw, 50px)',
-          height: 'clamp(42px, 3.5vw, 50px)',
+          width: 'clamp(36px, 3.5vw, 50px)',
+          height: 'clamp(36px, 3.5vw, 50px)',
           borderRadius: '50%',
-          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
@@ -616,18 +691,18 @@ export function FeaturedCars() {
           btn.style.boxShadow = '0 8px 30px rgba(0,0,0,0.6)';
         }}
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={20} />
       </button>
 
-      {/* ── Right Edge Next Button ───────────────────────────────────────────── */}
+      {/* ── Right Edge Next Button (Visible on both PC & Mobile) ──────────── */}
       <button
         type="button"
         onClick={handleManualNext}
         aria-label="Next car"
-        className="bencho-sweep-button"
+        className="bencho-sweep-button flex"
         style={{
           position: 'absolute',
-          right: 'clamp(0.6rem, 1.8vw, 1.75rem)',
+          right: 'clamp(0.4rem, 1.8vw, 1.75rem)',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 25,
@@ -635,10 +710,9 @@ export function FeaturedCars() {
           backdropFilter: 'blur(12px)',
           border: '1.5px solid rgba(255, 255, 255, 0.22)',
           color: '#ffffff',
-          width: 'clamp(42px, 3.5vw, 50px)',
-          height: 'clamp(42px, 3.5vw, 50px)',
+          width: 'clamp(36px, 3.5vw, 50px)',
+          height: 'clamp(36px, 3.5vw, 50px)',
           borderRadius: '50%',
-          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
@@ -657,7 +731,7 @@ export function FeaturedCars() {
           btn.style.boxShadow = '0 8px 30px rgba(0,0,0,0.6)';
         }}
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={20} />
       </button>
     </section>
   );

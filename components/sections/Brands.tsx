@@ -110,11 +110,11 @@ export function Brands() {
             style={{
               fontFamily: 'var(--font-manrope), sans-serif',
               fontSize: '1.05rem',
-              color: 'var(--charcoal)',
+              color: 'rgba(22, 22, 23, 0.78)',
               lineHeight: 1.6,
               maxWidth: '52ch',
               margin: 0,
-              opacity: headerInView || reducedMotion ? 0.85 : 0,
+              opacity: headerInView || reducedMotion ? 0.9 : 0,
               transform: headerInView || reducedMotion ? 'translateY(0)' : 'translateY(16px)',
               transition: reducedMotion ? 'none' : 'opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s',
             }}
@@ -129,8 +129,8 @@ export function Brands() {
           aria-label="Car brands in Bangladesh"
           className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
           style={{
-            borderTop: '1px solid var(--graphite-2)',
-            borderLeft: '1px solid var(--graphite-2)',
+            borderTop: '1px solid rgba(35, 35, 38, 0.15)',
+            borderLeft: '1px solid rgba(35, 35, 38, 0.15)',
           }}
         >
           {brandsContent.brands.map((brand) => (
@@ -178,8 +178,8 @@ export function Brands() {
             style={{
               fontFamily: 'var(--font-manrope), sans-serif',
               fontSize: '0.72rem',
-              color: 'var(--charcoal)',
-              opacity: 0.65,
+              color: 'rgba(22, 22, 23, 0.7)',
+              opacity: 0.8,
               lineHeight: 1.5,
               maxWidth: '68ch',
               margin: 0,

@@ -12,6 +12,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { introState } from '@/lib/animation/introState';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 import { useIntroGate } from '@/lib/hooks/useIntroGate';
@@ -109,21 +110,20 @@ export function HeroPhase2() {
               : 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
-          <img
-            src="/images/hero/hero-cinematic.jpg"
-            alt=""
-            aria-hidden="true"
+          <Image
+            src="/images/hero/hero-cinematic-light.webp"
+            alt="Garir Mela Featured Vehicle"
+            fill
+            sizes="100vw"
+            priority
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
               objectPosition: 'center 40%',
-              display: 'block',
             }}
           />
         </div>
 
-        {/* Dark gradient overlay — bottom heavy for text legibility */}
+        {/* Lighter gradient overlay — crisp and bright while preserving text legibility */}
         <div
           style={{
             position: 'absolute',
@@ -131,11 +131,11 @@ export function HeroPhase2() {
             background: `
               linear-gradient(
                 to top,
-                rgba(7, 7, 7, 0.92) 0%,
-                rgba(7, 7, 7, 0.65) 30%,
-                rgba(7, 7, 7, 0.35) 55%,
-                rgba(7, 7, 7, 0.18) 75%,
-                rgba(7, 7, 7, 0.08) 100%
+                rgba(7, 7, 7, 0.78) 0%,
+                rgba(7, 7, 7, 0.48) 32%,
+                rgba(7, 7, 7, 0.22) 58%,
+                rgba(7, 7, 7, 0.08) 80%,
+                transparent 100%
               )
             `,
             pointerEvents: 'none',
@@ -147,7 +147,7 @@ export function HeroPhase2() {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to right, rgba(7,7,7,0.55) 0%, rgba(7,7,7,0.15) 45%, transparent 70%)',
+            background: 'linear-gradient(to right, rgba(7,7,7,0.48) 0%, rgba(7,7,7,0.18) 45%, transparent 75%)',
             pointerEvents: 'none',
           }}
         />
@@ -175,9 +175,10 @@ export function HeroPhase2() {
           height: '100%',
           maxWidth: '1440px',
           margin: '0 auto',
-          paddingLeft: 'clamp(2.5rem, 6vw, 5.5rem)',
-          paddingRight: 'clamp(2.5rem, 6vw, 5.5rem)',
-          paddingBottom: 'clamp(3.5rem, 7vh, 5.5rem)',
+          paddingLeft: 'clamp(1.5rem, 5vw, 5rem)',
+          paddingRight: 'clamp(1.5rem, 5vw, 5rem)',
+          paddingBottom: 'clamp(3.5rem, 8vh, 6.5rem)',
+          paddingTop: 'clamp(4.5rem, 9vh, 6.5rem)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -187,13 +188,13 @@ export function HeroPhase2() {
       >
 
         {/* ── Main Content: headline + CTAs stacked at bottom-left */}
-        <div style={{ maxWidth: '680px' }}>
+        <div style={{ maxWidth: '680px', width: '100%' }}>
           {/* Eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.85rem' }}>
             <span
               style={{
                 fontFamily: 'var(--font-mono), monospace',
-                fontSize: '0.8rem',
+                fontSize: 'clamp(0.68rem, 1.2vw, 0.8rem)',
                 fontWeight: 600,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
@@ -202,21 +203,22 @@ export function HeroPhase2() {
             >
               BANGLADESH AUTOMOTIVE EXCHANGE
             </span>
-            <div style={{ width: 32, height: 2, backgroundColor: 'var(--red)', flexShrink: 0 }} />
+            <div style={{ width: 28, height: 2, backgroundColor: 'var(--red)', flexShrink: 0 }} />
           </div>
 
           {/* Headline */}
           <h1
             style={{
               fontFamily: 'var(--font-barlow-condensed), sans-serif',
-              fontSize: 'clamp(3.75rem, 8vw, 7.5rem)',
+              fontSize: 'clamp(2.5rem, 7.5vw, 7.5rem)',
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '-0.025em',
               lineHeight: 0.9,
               color: '#ffffff',
-              margin: '0 0 1.5rem 0',
+              margin: '0 0 1.25rem 0',
               textShadow: '0 4px 32px rgba(0,0,0,0.65)',
+              wordBreak: 'break-word',
             }}
           >
             FIND IT.<br />
@@ -228,11 +230,11 @@ export function HeroPhase2() {
           <p
             style={{
               fontFamily: 'var(--font-manrope), sans-serif',
-              fontSize: 'clamp(0.95rem, 1.15vw, 1.1rem)',
+              fontSize: 'clamp(0.88rem, 1.15vw, 1.1rem)',
               color: 'rgba(255,255,255,0.88)',
-              lineHeight: 1.65,
+              lineHeight: 1.6,
               maxWidth: '52ch',
-              marginBottom: '2.25rem',
+              marginBottom: '1.75rem',
               textShadow: '0 2px 12px rgba(0,0,0,0.5)',
             }}
           >
@@ -240,15 +242,22 @@ export function HeroPhase2() {
           </p>
 
           {/* CTAs with Bencho.dev Sweep and Hover Micro-Interactions */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
+          <div
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full"
+            style={{
+              marginBottom: 'clamp(2.5rem, 5vh, 4rem)',
+              marginTop: '0.5rem',
+            }}
+          >
             <Link
               href="/buy"
-              className="bencho-sweep-button"
+              className="bencho-sweep-button text-center justify-center"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '0.65rem',
-                padding: '1.05rem 2.4rem',
+                padding: '0.95rem 2rem',
                 backgroundColor: 'var(--red)',
                 color: '#ffffff',
                 fontFamily: 'var(--font-manrope), sans-serif',
@@ -260,6 +269,7 @@ export function HeroPhase2() {
                 border: '1.5px solid var(--red)',
                 boxShadow: '0 4px 20px rgba(225,37,27,0.35)',
                 cursor: 'pointer',
+                boxSizing: 'border-box',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLAnchorElement;
@@ -294,12 +304,13 @@ export function HeroPhase2() {
 
             <Link
               href="/sell"
-              className="bencho-sweep-button"
+              className="bencho-sweep-button text-center justify-center"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '0.65rem',
-                padding: '1.05rem 2.2rem',
+                padding: '0.95rem 1.85rem',
                 backgroundColor: 'rgba(7, 7, 7, 0.68)',
                 color: '#ffffff',
                 backdropFilter: 'blur(10px)',
@@ -311,6 +322,7 @@ export function HeroPhase2() {
                 textDecoration: 'none',
                 border: '1.5px solid rgba(255,255,255,0.4)',
                 cursor: 'pointer',
+                boxSizing: 'border-box',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLAnchorElement;
@@ -331,11 +343,11 @@ export function HeroPhase2() {
 
           {/* Quick Metrics Strip */}
           <div
+            className="flex flex-wrap gap-6 sm:gap-10"
             style={{
-              display: 'flex',
-              gap: '2.5rem',
-              paddingTop: '1.25rem',
-              borderTop: '1px solid rgba(255,255,255,0.2)',
+              borderTop: '1px solid rgba(255,255,255,0.22)',
+              paddingTop: 'clamp(1.75rem, 3.5vh, 2.5rem)',
+              marginTop: 'clamp(1rem, 2vh, 1.5rem)',
             }}
           >
             {[
@@ -348,7 +360,7 @@ export function HeroPhase2() {
                   style={{
                     display: 'block',
                     fontFamily: 'var(--font-barlow-condensed), sans-serif',
-                    fontSize: 'clamp(1.65rem, 2.5vw, 2.1rem)',
+                    fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)',
                     fontWeight: 700,
                     lineHeight: 1,
                     color: stat.red ? 'var(--red)' : '#ffffff',

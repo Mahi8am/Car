@@ -65,8 +65,8 @@ function computeLayout(vw: number, vh: number): ViewportLayout {
   } else if (isPortrait) {
     mode = 'portrait';
     carScreenX = 0.5;
-    carScreenY = 0.38;
-    carLengthFraction = 0.28;
+    carScreenY = 0.50;
+    carLengthFraction = 0.32;
     textRight = false;
     textLeftFraction = 0.0;
   } else {

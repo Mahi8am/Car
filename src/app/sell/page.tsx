@@ -926,7 +926,7 @@ export default function SellCarPage() {
                       required
                     />
                     <span style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '0.78rem', color: 'var(--charcoal)', lineHeight: 1.5 }}>
-                      I certify that the vehicle documents are authentic and I am legally authorized to sell this car in Bangladesh. I agree to Garir Mela's Seller Terms of Service.
+                      I certify that the vehicle documents are authentic and I am legally authorized to sell this car in Bangladesh. I agree to Garir Mela&apos;s Seller Terms of Service.
                     </span>
                   </label>
                 </div>

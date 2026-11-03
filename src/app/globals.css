@@ -21,7 +21,8 @@
   --color-graphite-2:   #303034;
   --color-steel:        #9A9DA2;
   --color-muted:        #7A7773;
-  --color-bone:         #EDE7DC;
+  --color-bone:         #F5F0E8;
+  --color-bone-light:   #FAF7F2;
   --color-red:          #E1251B;
   --color-red-deep:     #A8140E;
 
@@ -57,7 +58,8 @@
   --graphite-2: #303034;
   --steel:      #9A9DA2;
   --muted:      #7A7773;
-  --bone:       #EDE7DC;
+  --bone:       #F5F0E8;
+  --bone-light: #FAF7F2;
   --red:        #E1251B;
   --red-deep:   #A8140E;
   /* Car body paint — deep velvet matte crimson */

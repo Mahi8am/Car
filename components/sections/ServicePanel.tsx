@@ -60,136 +60,129 @@ export function ServicePanel({ panel, isOpen, onOpen, onKeyNav }: ServicePanelPr
       {/* ── Mobile / Tablet Stacked Panel ───────────────────────────────────────── */}
       <div
         id={`service-panel-mobile-${panel.id}`}
-        className="block md:hidden relative min-h-[440px] sm:min-h-[480px] bg-[var(--charcoal)] border border-[var(--graphite-2)] p-6 sm:p-8 flex flex-col justify-end overflow-hidden"
+        className="block md:hidden bg-[#1E1E22] border border-[rgba(35,35,38,0.18)] shadow-lg overflow-hidden"
       >
-        {/* Background image with film grading */}
-        {imgData && (
-          <Image
-            src={imgData.filename}
-            alt={imgData.alt}
-            fill
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={imgData.blurDataURL}
-            style={{
-              objectFit: 'cover',
-              objectPosition: `${imgData.focalPoint.x}% ${imgData.focalPoint.y}%`,
-              opacity: 0.38,
-              filter: 'grayscale(25%) contrast(1.18) brightness(0.9)',
-              zIndex: 0,
-            }}
-          />
-        )}
-
-        {/* Deep dark gradient scrim for contrast (WCAG AAA) */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(to top, rgba(7, 7, 7, 0.98) 45%, rgba(12, 11, 10, 0.7) 75%, rgba(22, 22, 23, 0.4) 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        {/* Content anchored bottom-left */}
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          {/* Panel number + red accent rule */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-            <span
+        {/* Dedicated top image container so the photo is 100% visible and bright */}
+        <div className="relative w-full h-[220px] sm:h-[260px] overflow-hidden bg-[var(--charcoal)]">
+          {imgData && (
+            <Image
+              src={imgData.filename}
+              alt={imgData.alt}
+              fill
+              sizes="100vw"
+              placeholder="blur"
+              blurDataURL={imgData.blurDataURL}
               style={{
-                fontFamily: 'var(--font-mono), monospace',
-                fontSize: '0.85rem',
-                color: 'var(--red)',
-                fontWeight: 600,
-                letterSpacing: '0.05em',
+                objectFit: 'cover',
+                objectPosition: `${imgData.focalPoint.x}% ${imgData.focalPoint.y}%`,
+                filter: 'contrast(1.02) brightness(1.10)',
+              }}
+            />
+          )}
+          {/* Subtle badge tag on top of image */}
+          <div className="absolute top-3 left-3 bg-[var(--charcoal)]/85 backdrop-blur-sm px-2.5 py-1 flex items-center gap-2 border border-white/10">
+            <span className="font-mono text-xs text-[var(--red)] font-bold">{panel.number}</span>
+          </div>
+        </div>
+
+        {/* Content container below image with generous left padding */}
+        <div
+          className="flex flex-col justify-between"
+          style={{
+            paddingTop: 'clamp(1.25rem, 3vh, 1.75rem)',
+            paddingBottom: 'clamp(1.5rem, 3.5vh, 2rem)',
+            paddingRight: 'clamp(1.25rem, 4vw, 1.75rem)',
+            paddingLeft: 'clamp(1.75rem, 6vw, 2.5rem)',
+          }}
+        >
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-mono text-xs text-[var(--red)] font-semibold tracking-wider">
+                {panel.number}
+              </span>
+              <div className="w-5 h-[1px] bg-[var(--red)]" />
+            </div>
+
+            <h3
+              style={{
+                fontFamily: 'var(--font-barlow-condensed), sans-serif',
+                fontSize: 'clamp(2rem, 7vw, 2.6rem)',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '-0.02em',
+                color: '#ffffff',
+                margin: '0 0 0.5rem 0',
+                lineHeight: 1,
               }}
             >
-              {panel.number}
-            </span>
-            <div style={{ width: 18, height: 1, backgroundColor: 'var(--red)' }} />
+              {panel.title}
+            </h3>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '0.9rem',
+                color: 'rgba(255, 255, 255, 0.88)',
+                margin: '0 0 1.25rem 0',
+                lineHeight: 1.5,
+              }}
+            >
+              {panel.line}
+            </p>
+
+            <ul
+              style={{
+                listStyle: 'none',
+                padding: 0,
+                margin: '0 0 1.5rem 0',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem',
+              }}
+            >
+              {panel.points.map((pt) => (
+                <li
+                  key={pt}
+                  style={{
+                    fontFamily: 'var(--font-manrope), sans-serif',
+                    fontSize: '0.84rem',
+                    color: 'rgba(255, 255, 255, 0.82)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.55rem',
+                  }}
+                >
+                  <span style={{ color: 'var(--red)', fontSize: '0.65rem' }}>■</span>
+                  {pt}
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <h3
-            style={{
-              fontFamily: 'var(--font-barlow-condensed), sans-serif',
-              fontSize: 'clamp(2.5rem, 8vw, 3.25rem)',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '-0.02em',
-              color: 'var(--bone)',
-              margin: '0 0 0.5rem 0',
-              lineHeight: 0.95,
-            }}
-          >
-            {panel.title}
-          </h3>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-manrope), sans-serif',
-              fontSize: '0.92rem',
-              color: 'var(--bone)',
-              opacity: 0.82,
-              margin: '0 0 1.25rem 0',
-              lineHeight: 1.55,
-              maxWidth: '38ch',
-            }}
-          >
-            {panel.line}
-          </p>
-
-          <ul
-            style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: '0 0 1.75rem 0',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5rem',
-            }}
-          >
-            {panel.points.map((pt) => (
-              <li
-                key={pt}
-                style={{
-                  fontFamily: 'var(--font-manrope), sans-serif',
-                  fontSize: '0.82rem',
-                  color: 'var(--steel)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.55rem',
-                }}
-              >
-                <span style={{ color: 'var(--red)', fontSize: '0.65rem' }}>■</span>
-                {pt}
-              </li>
-            ))}
-          </ul>
 
           <Link
             href={panel.cta.href}
-            className="cta-btn"
+            className="cta-btn bencho-sweep-button"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '0.5rem',
-              padding: '0.75rem 1.5rem',
-              border: '1px solid var(--bone)',
+              padding: '0.85rem 1.75rem',
+              backgroundColor: 'var(--red)',
+              border: '1.5px solid var(--red)',
               fontFamily: 'var(--font-manrope), sans-serif',
-              fontSize: '0.78rem',
-              fontWeight: 600,
+              fontSize: '0.8rem',
+              fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.14em',
-              color: 'var(--bone)',
+              color: '#ffffff',
               textDecoration: 'none',
-              backgroundColor: 'transparent',
-              transition: 'background-color 0.2s, color 0.2s, border-color 0.2s',
+              boxShadow: '0 4px 15px rgba(225, 37, 27, 0.4)',
+              width: '100%',
             }}
           >
-            {panel.cta.label}
-            <ArrowUpRight size={14} />
+            <span>{panel.cta.label}</span>
+            <ArrowUpRight size={15} />
           </Link>
         </div>
       </div>
@@ -247,8 +240,8 @@ export function ServicePanel({ panel, isOpen, onOpen, onKeyNav }: ServicePanelPr
               style={{
                 objectFit: 'cover',
                 objectPosition: `${imgData.focalPoint.x}% ${imgData.focalPoint.y}%`,
-                opacity: isOpen ? 0.38 : 0.16,
-                filter: 'grayscale(25%) contrast(1.18) brightness(0.9)',
+                opacity: isOpen ? 0.90 : 0.60,
+                filter: 'contrast(1.02) brightness(1.14)',
                 transition: 'opacity 0.6s ease',
               }}
             />
@@ -262,8 +255,8 @@ export function ServicePanel({ panel, isOpen, onOpen, onKeyNav }: ServicePanelPr
             position: 'absolute',
             inset: 0,
             background: isOpen
-              ? 'linear-gradient(to top, rgba(7, 7, 7, 0.97) 25%, rgba(12, 11, 10, 0.65) 60%, rgba(22, 22, 23, 0.35) 100%)'
-              : 'linear-gradient(to top, rgba(7, 7, 7, 0.98) 0%, rgba(12, 11, 10, 0.85) 100%)',
+              ? 'linear-gradient(to top, rgba(7, 7, 7, 0.62) 20%, rgba(12, 11, 10, 0.24) 60%, rgba(22, 22, 23, 0.05) 100%)'
+              : 'linear-gradient(to top, rgba(7, 7, 7, 0.48) 0%, rgba(12, 11, 10, 0.18) 100%)',
             zIndex: 1,
             transition: 'background 0.5s ease',
           }}
@@ -329,7 +322,10 @@ export function ServicePanel({ panel, isOpen, onOpen, onKeyNav }: ServicePanelPr
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-end',
-              padding: 'clamp(2.5rem, 4vw, 4rem) clamp(2rem, 3.5vw, 3.5rem)',
+              paddingTop: 'clamp(2.5rem, 4vw, 4rem)',
+              paddingBottom: 'clamp(2.5rem, 4vw, 4rem)',
+              paddingRight: 'clamp(2rem, 3.5vw, 3.5rem)',
+              paddingLeft: 'clamp(3.5rem, 6vw, 5.5rem)',
             }}
           >
             {/* Header: Number + Accent Line */}
@@ -412,27 +408,28 @@ export function ServicePanel({ panel, isOpen, onOpen, onKeyNav }: ServicePanelPr
             <div>
               <Link
                 href={panel.cta.href}
-                className="cta-btn primary-cta"
+                className="cta-btn primary-cta bencho-sweep-button"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.55rem',
-                  padding: '0.9rem 2rem',
+                  gap: '0.65rem',
+                  padding: '1rem 2.4rem',
                   backgroundColor: 'var(--red)',
-                  color: 'var(--bone)',
+                  color: '#ffffff',
                   fontFamily: 'var(--font-manrope), sans-serif',
-                  fontSize: '0.8rem',
-                  fontWeight: 600,
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
                   textDecoration: 'none',
                   borderRadius: 0,
-                  border: '1px solid var(--red)',
-                  transition: 'background-color 0.2s ease, transform 0.2s ease',
+                  border: '1.5px solid var(--red)',
+                  boxShadow: '0 4px 20px rgba(225, 37, 27, 0.4)',
+                  transition: 'background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease',
                 }}
               >
-                {panel.cta.label}
-                <ArrowUpRight size={15} />
+                <span>{panel.cta.label}</span>
+                <ArrowUpRight size={16} />
               </Link>
             </div>
           </div>

@@ -45,9 +45,10 @@ export function buildMasterTimeline(force = false): gsap.core.Timeline {
   }
 
   // Reset introState to initial values for replay safety
+  const isPortraitMode = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
   introState.t             = 0;
   introState.carY          = CAR_START_Y;    // off-screen below
-  introState.carX          = carConfig.carXOffset;   // left of screen centre
+  introState.carX          = isPortraitMode ? 0 : carConfig.carXOffset;   // centered on mobile portrait, left-offset on PC
   introState.carYaw        = 0;
   introState.carRoll       = 0;
   introState.carVisible    = true;

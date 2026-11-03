@@ -81,8 +81,8 @@ export function Footer() {
       <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
         {/* Top Grid: Brand & Tagline + Nav Link Columns + Contact Block */}
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12"
-          style={{ marginBottom: '5rem' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12"
+          style={{ marginBottom: '4rem' }}
         >
           {/* Col 1: Brand & Identity */}
           <div className="lg:col-span-2">
@@ -97,8 +97,7 @@ export function Footer() {
               style={{
                 fontFamily: 'var(--font-manrope), sans-serif',
                 fontSize: '0.95rem',
-                color: 'var(--charcoal)',
-                opacity: 0.85,
+                color: 'rgba(22, 22, 23, 0.78)',
                 lineHeight: 1.6,
                 maxWidth: '38ch',
                 marginBottom: '1.75rem',
@@ -112,7 +111,7 @@ export function Footer() {
               <a
                 href={siteConfig.footer.socials[0]?.href || '#'}
                 aria-label="Facebook"
-                style={{ color: 'var(--charcoal)', transition: 'color 0.2s' }}
+                style={{ color: 'rgba(22, 22, 23, 0.75)', transition: 'color 0.2s' }}
                 className="hover:text-[var(--red)]"
               >
                 <FacebookIcon />
@@ -120,7 +119,7 @@ export function Footer() {
               <a
                 href={siteConfig.footer.socials[1]?.href || '#'}
                 aria-label="Instagram"
-                style={{ color: 'var(--charcoal)', transition: 'color 0.2s' }}
+                style={{ color: 'rgba(22, 22, 23, 0.75)', transition: 'color 0.2s' }}
                 className="hover:text-[var(--red)]"
               >
                 <InstagramIcon />
@@ -128,7 +127,7 @@ export function Footer() {
               <a
                 href={siteConfig.footer.socials[2]?.href || '#'}
                 aria-label="YouTube"
-                style={{ color: 'var(--charcoal)', transition: 'color 0.2s' }}
+                style={{ color: 'rgba(22, 22, 23, 0.75)', transition: 'color 0.2s' }}
                 className="hover:text-[var(--red)]"
               >
                 <YouTubeIcon />
@@ -161,8 +160,7 @@ export function Footer() {
                       style={{
                         fontFamily: 'var(--font-manrope), sans-serif',
                         fontSize: '0.88rem',
-                        color: 'var(--charcoal)',
-                        opacity: 0.82,
+                        color: 'rgba(22, 22, 23, 0.75)',
                         textDecoration: 'none',
                         transition: 'color 0.2s, opacity 0.2s',
                       }}
@@ -198,8 +196,7 @@ export function Footer() {
                 gap: '0.65rem',
                 fontFamily: 'var(--font-manrope), sans-serif',
                 fontSize: '0.88rem',
-                color: 'var(--charcoal)',
-                opacity: 0.85,
+                color: 'rgba(22, 22, 23, 0.78)',
                 lineHeight: 1.55,
               }}
             >
@@ -239,8 +236,7 @@ export function Footer() {
             style={{
               fontFamily: 'var(--font-manrope), sans-serif',
               fontSize: '0.78rem',
-              color: 'var(--charcoal)',
-              opacity: 0.75,
+              color: 'rgba(22, 22, 23, 0.7)',
               margin: 0,
             }}
           >

@@ -836,31 +836,6 @@ function BuyMarketplaceContent() {
                     </div>
 
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setActiveContactModalCar(car);
-                        }}
-                        aria-label={`Quick contact for ${car.name}`}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          padding: '0.75rem',
-                          backgroundColor: 'rgba(35,35,38,0.06)',
-                          border: '1px solid rgba(35,35,38,0.18)',
-                          color: 'var(--ink-950)',
-                          cursor: 'pointer',
-                          transition: 'background-color 0.2s',
-                        }}
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(35,35,38,0.14)'; }}
-                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(35,35,38,0.06)'; }}
-                      >
-                        <Phone size={14} />
-                      </button>
-
                       <Link
                         href={`/buy/${car.id}`}
                         className="bencho-sweep-button"

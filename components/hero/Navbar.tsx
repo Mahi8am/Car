@@ -13,6 +13,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Search, User, Menu } from 'lucide-react';
 import { introState } from '@/lib/animation/introState';
 import siteConfig from '@/config/site.config';
@@ -56,7 +57,7 @@ export function Navbar() {
       }}
     >
       {/* Logo */}
-      <a href="/" aria-label="Garir Mela home" style={{ display: 'flex', alignItems: 'center' }}>
+      <Link href="/" aria-label="Garir Mela home" style={{ display: 'flex', alignItems: 'center' }}>
         <Image
           src="/brand/logo-white.png"
           alt={siteConfig.brandName}
@@ -65,7 +66,7 @@ export function Navbar() {
           priority
           style={{ width: 'clamp(64px, 7vw, 86px)', height: 'auto', opacity: 0.92 }}
         />
-      </a>
+      </Link>
 
       {/* Desktop nav items */}
       {!isMobile && (

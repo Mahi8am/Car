@@ -38,9 +38,10 @@ interface DebugPanelProps {
 function useFPS() {
   const [fps, setFps] = useState(0);
   const frames = useRef(0);
-  const last = useRef(performance.now());
+  const last = useRef(0);
 
   useEffect(() => {
+    last.current = performance.now();
     let raf: number;
     const tick = () => {
       frames.current++;

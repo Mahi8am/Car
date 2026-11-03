@@ -29,7 +29,7 @@ export function HeroContent() {
 
   useEffect(() => {
     if (reducedMotion || introState.introComplete) {
-      setRevealed(true);
+      queueMicrotask(() => setRevealed(true));
       if (containerRef.current) {
         containerRef.current.style.opacity = '1';
         containerRef.current.style.transform = 'translateY(0)';

@@ -56,8 +56,9 @@ export function TrackMorphLayer() {
       el.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
       /* Subtle, elegant hairline track glow dissolve instead of overwhelming flood */
-      const leftCX  = LEFT_PCT  * w;
-      const rightCX = RIGHT_PCT * w;
+      const isPortrait = w < 768 || w < h;
+      const leftCX  = (isPortrait ? (0.5 - 0.16) : LEFT_PCT)  * w;
+      const rightCX = (isPortrait ? (0.5 + 0.16) : RIGHT_PCT) * w;
       const initHW  = INIT_HW_PCT * w;
 
       const expandProg = easeOut3(norm(tp, 0.0, 0.6));

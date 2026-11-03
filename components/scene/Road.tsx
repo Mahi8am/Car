@@ -185,6 +185,8 @@ export function Road() {
     mat.uniforms.uCamZ.value         = -introState.cameraY;
     mat.uniforms.uTrackOpacity.value  = introState.trackOpacity;
     mat.uniforms.uCarWorldZ.value     = -introState.carY;  // worldZ = -screenY
+    mat.uniforms.uLeftX.value        = introState.carX - halfTrackW;
+    mat.uniforms.uRightX.value       = introState.carX + halfTrackW;
   });
 
   return (
